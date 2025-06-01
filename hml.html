@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معلومة في دقيقة</title>
+    <style>
+        /* الخط الأساسي للصفحة */
+        body {
+            font-family: 'Inter', sans-serif; /* استخدام خط Inter */
+            background-color: #f0f2f5; /* لون خلفية فاتح */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            direction: rtl; /* لجعل اتجاه الصفحة من اليمين لليسار */
+            text-align: right; /* لمحاذاة النص لليمين افتراضياً */
+            min-height: 100vh; /* لضمان أن الصفحة تملأ كامل الارتفاع */
+            color: #333; /* لون النص الأساسي */
+        }
+
+        /* تنسيق الهيدر (رأس الصفحة) */
+        header {
+            background-color: #ffffff; /* خلفية بيضاء للهيدر */
+            padding: 20px 0;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف للهيدر */
+            display: flex;
+            align-items: center;
+            justify-content: center; /* للمحاذاة الأفقية للعناصر */
+            position: relative; /* لتحديد موقع علم فلسطين */
+            border-bottom-left-radius: 15px; /* حواف دائرية سفلية */
+            border-bottom-right-radius: 15px; /* حواف دائرية سفلية */
+        }
+
+        /* تنسيق عنوان الموقع */
+        .site-title {
+            color: #007bff; /* لون أزرق جذاب */
+            margin: 0 20px; /* مسافة بين المصباح والعنوان */
+            font-size: 2.8em; /* حجم خط كبير للعنوان */
+            font-weight: bold; /* خط سميك */
+            display: inline-block;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* ظل خفيف للنص */
+        }
+
+        /* تنسيق أيقونات المصباح */
+        .light-bulb-icon {
+            width: 45px; /* حجم أيقونة المصباح */
+            height: 45px;
+            fill: #ffc107; /* لون أصفر للمصباح */
+            vertical-align: middle;
+            filter: drop-shadow(0 0 5px rgba(255, 193, 7, 0.7)); /* توهج خفيف للمصباح */
+        }
+
+        /* تنسيق علم فلسطين */
+        .palestine-flag {
+            position: absolute;
+            left: 20px; /* موقع العلم على اليسار */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70px; /* حجم العلم */
+            height: auto;
+            border: 1px solid #ddd; /* حدود خفيفة للعلم */
+            border-radius: 5px; /* حواف دائرية للعلم */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* ظل للعلم */
+        }
+
+        /* تنسيق المحتوى الرئيسي */
+        main {
+            padding: 30px 20px;
+            width: 90%;
+            max-width: 950px;
+            text-align: center;
+            flex-grow: 1; /* للسماح للمحتوى الرئيسي بالتمدد */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* تنسيق حاوية الأزرار */
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap; /* لجعل الأزرار تنتقل لسطر جديد إذا لم يكن هناك مساحة كافية */
+            justify-content: center;
+            gap: 20px; /* المسافة بين الأزرار */
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        /* تنسيق الأزرار */
+        .info-button {
+            background-color: #28a745; /* لون أخضر جذاب */
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 10px; /* حواف دائرية للأزرار */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            min-width: 220px; /* لضمان حجم متناسق للأزرار */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ظل خفيف للأزرار */
+            font-weight: 500; /* سمك الخط */
+        }
+
+        .info-button:hover {
+            background-color: #218838; /* لون أخضر أغمق عند التمرير */
+            transform: translateY(-3px); /* تأثير رفع بسيط عند التمرير */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* ظل أكبر عند التمرير */
+        }
+
+        .info-button:active {
+            transform: translateY(0); /* إعادة الزر لمكانه عند الضغط */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ظل أصغر عند الضغط */
+        }
+
+        /* تنسيق صندوق المعلومة */
+        .info-box {
+            background-color: #e0f7fa; /* أزرق فاتح جداً للخلفية */
+            border: 3px solid #007bff; /* إطار أزرق غامق */
+            border-radius: 15px; /* حواف دائرية للصندوق */
+            padding: 30px;
+            font-size: 1.4em; /* حجم خط كبير للمعلومة */
+            color: #2c3e50; /* لون نص داكن لقابلية القراءة */
+            min-height: 150px; /* لتحديد ارتفاع أدنى للصندوق */
+            display: flex; /* لتمكين التوسيط الرأسي والأفقي للمحتوى */
+            align-items: center; /* توسيط رأسي */
+            justify-content: center; /* توسيط أفقي */
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* ظل أكبر للصندوق */
+            line-height: 1.7; /* لتحسين قابلية القراءة */
+            width: 100%;
+            max-width: 700px; /* أقصى عرض للصندوق */
+            margin-top: 20px; /* مسافة من الأزرار */
+        }
+
+        /* تعديلات للتصميم المتجاوب (Responsive) */
+        @media (max-width: 768px) {
+            .site-title {
+                font-size: 2.2em; /* تصغير حجم العنوان */
+            }
+
+            .light-bulb-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .palestine-flag {
+                width: 50px;
+                left: 10px;
+            }
+
+            .info-button {
+                font-size: 1.1em;
+                padding: 15px 25px;
+                min-width: 180px;
+            }
+
+            .info-box {
+                font-size: 1.2em;
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column; /* جعل العناصر في الهيدر تتكدس عمودياً */
+                padding: 15px 0;
+            }
+
+            .site-title {
+                font-size: 1.8em;
+                margin: 10px 0;
+            }
+
+            .light-bulb-icon {
+                width: 30px;
+                height: 30px;
+            }
+
+            .palestine-flag {
+                position: static; /* إزالة التموضع المطلق للعلم */
+                margin-top: 10px; /* مسافة علوية للعلم */
+                transform: none;
+                width: 40px;
+            }
+
+            .buttons-container {
+                flex-direction: column; /* الأزرار تكون فوق بعضها في الشاشات الصغيرة جداً */
+                align-items: center;
+                gap: 15px;
+            }
+
+            .info-button {
+                width: 90%; /* لجعل الأزرار أوسع في الشاشات الصغيرة */
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+
+            .info-box {
+                font-size: 1em;
+                padding: 20px;
+                min-height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <svg class="light-bulb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"></path>
+            <path d="M5 14h14"></path>
+            <path d="M12 22v-4"></path>
+            <path d="M9 18h6"></path>
+        </svg>
+        <h1 class="site-title">معلومة في دقيقة</h1>
+        <svg class="light-bulb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"></path>
+            <path d="M5 14h14"></path>
+            <path d="M12 22v-4"></path>
+            <path d="M9 18h6"></path>
+        </svg>
+        <img src="https://placehold.co/70x40/000000/FFFFFF?text=علم+فلسطين" alt="علم فلسطين" class="palestine-flag">
+    </header>
+
+    <main>
+        <div class="buttons-container">
+            <button class="info-button" data-info-type="عامة">معلومة عامة</button>
+            <button class="info-button" data-info-type="دينية-اسلامية">معلومة دينية إسلامية</button>
+            <button class="info-button" data-info-type="تاريخية">معلومة تاريخية</button>
+            <button class="info-button" data-info-type="نصيحة-يومية">نصيحة يومية</button>
+            <button class="info-button" data-info-type="حقيقة-علمية">حقيقة علمية</button>
+        </div>
+
+        <div class="info-box" id="infoBox">
+            <p id="infoContent">اضغط على أحد الأزرار لترى معلومة!</p>
+        </div>
+    </main>
+
+    <script>
+        // جلب جميع الأزرار وعناصر عرض المعلومة
+        const infoButtons = document.querySelectorAll('.info-button');
+        const infoContent = document.getElementById('infoContent');
+        const infoBox = document.getElementById('infoBox');
+
+        // قاموس يحتوي على المعلومات لكل نوع
+        const facts = {
+            'عامة': [
+                'أصغر عظم في جسم الإنسان هو عظم الركاب في الأذن الوسطى.',
+                'هل تعلم أن عدد النجوم في مجرة درب التبانة يقدر بمئات المليارات؟',
+                'يوجد أكثر من 7000 لغة منطوقة حول العالم.',
+                'يستغرق ضوء الشمس حوالي 8 دقائق و 20 ثانية للوصول إلى الأرض.',
+                'أطول سلسلة جبلية في العالم هي جبال الأنديز في أمريكا الجنوبية.'
+            ],
+            'دينية-اسلامية': [
+                'أول مسجد بني في الإسلام هو مسجد قباء.',
+                'القرآن الكريم نزل على سيدنا محمد صلى الله عليه وسلم في 23 سنة.',
+                'أركان الإسلام خمسة: الشهادتان، إقام الصلاة، إيتاء الزكاة، صوم رمضان، وحج البيت لمن استطاع إليه سبيلاً.',
+                'أول من آمن بالرسول صلى الله عليه وسلم من النساء هي السيدة خديجة رضي الله عنها.',
+                'ليلة القدر خير من ألف شهر.'
+            ],
+            'تاريخية': [
+                'بنى الفراعنة الأهرامات في مصر القديمة كقبور لملوكهم.',
+                'سقطت الدولة الرومانية الغربية عام 476 م.',
+                'تم اختراع الطباعة على يد يوهان غوتنبرغ في القرن الخامس عشر.',
+                'حرب المائة عام بين إنجلترا وفرنسا استمرت 116 عامًا.',
+                'اكتشف كريستوفر كولومبوس أمريكا عام 1492.'
+            ],
+            'نصيحة-يومية': [
+                'ابدأ يومك بابتسامة وتفاؤل.',
+                'خصص وقتًا للاسترخاء والتأمل يوميًا.',
+                'تعلم شيئًا جديدًا كل يوم، حتى لو كان صغيرًا.',
+                'اشرب كمية كافية من الماء للحفاظ على ترطيب جسمك.',
+                'ساعد الآخرين، فالعطاء يجلب السعادة.'
+            ],
+            'حقيقة-علمية': [
+                'الماء يتمدد عندما يتجمد، وهذا هو السبب في أن الجليد يطفو على الماء.',
+                'البرق يمكن أن يسخن الهواء المحيط به إلى حوالي 30,000 درجة مئوية، وهو أشد حرارة من سطح الشمس.',
+                'الجاذبية ليست قوة دفع، بل هي انحناء في الزمكان سببه وجود الكتلة والطاقة.',
+                'الذهب الخالص (24 قيراط) ناعم جدًا لدرجة أنه يمكن تشكيله باليد.',
+                'أسرع كائن حي على وجه الأرض هو الفهد، حيث يمكن أن تصل سرعته إلى 120 كم/ساعة.'
+            ]
+        };
+
+        // إضافة مستمع حدث لكل زر
+        infoButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const type = button.dataset.infoType; // جلب نوع المعلومة من خاصية data-info-type
+                const dailyFacts = facts[type]; // جلب قائمة الحقائق لهذا النوع
+                const randomIndex = Math.floor(Math.random() * dailyFacts.length); // اختيار حقيقة عشوائية
+                infoContent.textContent = dailyFacts[randomIndex]; // عرض الحقيقة في الصندوق
+                infoBox.style.display = 'flex'; // التأكد من أن الصندوق مرئي (إذا كان مخفياً بواسطة CSS)
+            });
+        });
+    </script>
+</body>
+</html>
